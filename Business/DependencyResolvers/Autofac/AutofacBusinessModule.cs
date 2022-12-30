@@ -33,7 +33,6 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
-            
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
