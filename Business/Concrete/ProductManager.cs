@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.CCS;
 using Business.Constans;
 using Business.ValidationRulers.FluentValidation;
@@ -31,6 +32,7 @@ namespace Business.Concrete
 
         }
 
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
@@ -38,7 +40,7 @@ namespace Business.Concrete
             //Business codes
 
             IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
-                CheckIfProductCountOfCategoryCorrect(product.ProductId), CheckIfCategoryLimitExceded());
+            CheckIfProductCountOfCategoryCorrect(product.ProductId), CheckIfCategoryLimitExceded());
 
             if (result != null)
             {
