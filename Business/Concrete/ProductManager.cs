@@ -3,6 +3,7 @@ using Business.BusinessAspect.Autofac;
 using Business.CCS;
 using Business.Constans;
 using Business.ValidationRulers.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -53,6 +54,7 @@ namespace Business.Concrete
 
         }
 
+        [CacheAspect] //key, value
         public IDataResult<List<Product>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
@@ -74,6 +76,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDAL.GetAll(p => p.CategoryId == id));
         }
 
+        [CacheAspect] //key, value
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDAL.Get(p => p.ProductId == productId));
